@@ -8,7 +8,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+import static com.github.vladyslavkhyzhniak.hamis.hamis.MOD_ID;
+
+
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HamisEntity extends PathfinderMob {
     public HamisEntity(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
