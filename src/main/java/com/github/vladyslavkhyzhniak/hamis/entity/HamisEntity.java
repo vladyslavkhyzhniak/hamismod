@@ -1,6 +1,7 @@
 package com.github.vladyslavkhyzhniak.hamis.entity;
 
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -29,5 +30,10 @@ public class HamisEntity extends PathfinderMob {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.HAMIS.get(), HamisEntity.createHamisAttributes().build());
+    }
+
+    @Override
+    protected ResourceLocation getDefaultLootTable(){
+        return new ResourceLocation(MOD_ID,"entities/hamis");
     }
 }
