@@ -16,10 +16,4 @@ public class ClientModEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.HAMIS.get(), HamisRender::new);
     }
-
-    @SubscribeEvent
-    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        // Регистрируем "чертеж" модели
-        event.registerLayerDefinition(HamisModel.LAYER_LOCATION, HamisModel::createBodyLayer);
-    }
 }
