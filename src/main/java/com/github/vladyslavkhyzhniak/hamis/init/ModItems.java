@@ -14,7 +14,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
     public static final RegistryObject<Item> HAMIS_SPAWN_EGG = ITEMS.register("hamis_spawn_egg",
-            ()-> new ForgeSpawnEggItem(ModEntities.HAMIS, 0x800080, 0x000000,
+            ()-> new ForgeSpawnEggItem(ModEntities.HAMIS, 0x553473, 0xC7EF63,
                     new Item.Properties()));
 
 
