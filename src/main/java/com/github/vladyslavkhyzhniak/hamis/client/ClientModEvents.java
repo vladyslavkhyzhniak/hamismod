@@ -1,5 +1,6 @@
 package com.github.vladyslavkhyzhniak.hamis.client;
 
+import com.github.vladyslavkhyzhniak.hamis.client.model.HamisModel;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -14,5 +15,11 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.HAMIS.get(), HamisRender::new);
+    }
+
+    @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        // Регистрируем "чертеж" модели
+        event.registerLayerDefinition(HamisModel.LAYER_LOCATION, HamisModel::createBodyLayer);
     }
 }
