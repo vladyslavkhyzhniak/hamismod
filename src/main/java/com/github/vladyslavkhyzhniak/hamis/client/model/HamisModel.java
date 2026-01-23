@@ -14,7 +14,6 @@ import net.minecraft.util.Mth;
 import static com.github.vladyslavkhyzhniak.hamis.hamis.MOD_ID;
 
 public class HamisModel extends EntityModel<HamisEntity> {
-	// Уникальный ключ для поиска модели в игре
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(MOD_ID, "hamis"), "main");
 
 	private final ModelPart boby;
@@ -33,24 +32,21 @@ public class HamisModel extends EntityModel<HamisEntity> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		// Тело
 		PartDefinition boby = partdefinition.addOrReplaceChild("boby", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -5.0F, -2.0F, 4.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(2, 10).addBox(0.0F, -6.0F, -1.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
 				.texOffs(7, 9).addBox(0.0F, -2.0F, -1.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 20.0F, 0.0F));
 
-		// Средняя нога (LegM)
 		PartDefinition legM = partdefinition.addOrReplaceChild("legM", CubeListBuilder.create().texOffs(4, 6).addBox(-4.0F, -2.0F, -1.0F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 23.0F, -1.0F));
-		// Исправили имена переменных: "01" -> "part01"
+
 		legM.addOrReplaceChild("part01", CubeListBuilder.create().texOffs(0, 6).addBox(-1.0F, -2.0F, -1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, -1.0F, 0.0F));
 		legM.addOrReplaceChild("part02", CubeListBuilder.create().texOffs(12, 6).addBox(-1.0F, -2.0F, -1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, -2.0F, 0.0F));
 
-		// Правая нога (LegR)
 		PartDefinition legR = partdefinition.addOrReplaceChild("legR", CubeListBuilder.create(), PartPose.offset(3.0F, 22.0F, 2.0F));
 		legR.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(12, 10).addBox(-1.0F, 1.0F, -1.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, -1.0F));
 		legR.addOrReplaceChild("bone2", CubeListBuilder.create().texOffs(8, 6).addBox(-1.0F, 1.0F, -1.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -5.0F, -1.0F));
 		legR.addOrReplaceChild("part8", CubeListBuilder.create().texOffs(0, 6).addBox(-1.0F, -2.0F, -1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -1.0F));
 
-		// Левая нога (LegL)
+
 		PartDefinition legL = partdefinition.addOrReplaceChild("legL", CubeListBuilder.create(), PartPose.offset(0.0F, 23.0F, 0.0F));
 		legL.addOrReplaceChild("part1", CubeListBuilder.create().texOffs(12, 6).addBox(-1.0F, -2.0F, -1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -4.0F, 0.0F));
 		legL.addOrReplaceChild("part2", CubeListBuilder.create().texOffs(0, 6).addBox(-1.0F, -2.0F, -1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -3.0F, 0.0F));
@@ -65,7 +61,7 @@ public class HamisModel extends EntityModel<HamisEntity> {
 
 	@Override
 	public void setupAnim(HamisEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		// Простая анимация ходьбы, чтобы он не скользил
+
 		this.legL.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		this.legR.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
 		this.legM.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
