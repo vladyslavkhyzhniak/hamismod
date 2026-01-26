@@ -1,8 +1,8 @@
 package com.github.vladyslavkhyzhniak.hamis.block;
-
 import com.github.vladyslavkhyzhniak.hamis.entity.HamisEntity;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -16,7 +16,6 @@ import java.util.Random;
 
 public class HamisNestBlock extends Block {
 
-    private int spawnDelay = 20;
     public HamisNestBlock() {
         super(BlockBehaviour.Properties.of()
                 .strength(0.5f)
@@ -26,13 +25,13 @@ public class HamisNestBlock extends Block {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos blockPos, BlockState blockState, boolean p_60519_) {
-
-        if (state.getBlock() != blockState.getBlock()){
-            SpawnHamis((ServerLevel) level,blockPos,2,5);
+    public void onRemove(BlockState state, Level level, BlockPos blockPos, BlockState blockState, boolean isMoving) {
+        if (state.getBlock() != blockState.getBlock()) {
+            if (level instanceof ServerLevel serverLevel) {
+                SpawnHamis(serverLevel, blockPos, 3, 7);
+            }
         }
-        super.onRemove(state,level,blockPos,blockState,p_60519_);
-
+        super.onRemove(state, level, blockPos, blockState, isMoving);
     }
 
     @Override
@@ -40,29 +39,63 @@ public class HamisNestBlock extends Block {
         if (!level.hasNearbyAlivePlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 16)) {
             return;
         }
-        AABB checkArea = new AABB(
-                blockPos.getX(), blockPos.getY(),blockPos.getZ(),
-                blockPos.getX()+7,blockPos.getY()-20,blockPos.getZ()+7
-        );
-        List<HamisEntity> list =level.getEntitiesOfClass(HamisEntity.class, checkArea);
-        if (list.size() <13){
-            SpawnHamis((ServerLevel) level,blockPos,1,3);
+        AABB checkArea = new AABB(blockPos).inflate(10);
+        List<HamisEntity> list = level.getEntitiesOfClass(HamisEntity.class, checkArea);
+
+        if (list.size() < 13) {
+            SpawnHamis((ServerLevel) level, blockPos, 2, 3);
         }
     }
 
     private void SpawnHamis(ServerLevel level, BlockPos blockPos, int min, int max) {
         Random random = new Random();
-        int amount = random.nextInt((max - min) + 1) + min;
-        for (int i = 0; i<amount; i++){
-            HamisEntity hamis = ModEntities.HAMIS.get().create(level);
-            if(hamis != null){
-                double x = blockPos.getX()+ 1 + (level.random.nextDouble()-0.5);
-                double y = blockPos.getY() - 0.5;
-                double z = blockPos.getZ()+ 1 + (level.random.nextDouble()-0.5);
+        BlockPos bestSpot = findValidSpawnSpot(level, blockPos, random);
 
-                hamis.moveTo(x,y,z,level.random.nextFloat() * 360F,0);
-                level.addFreshEntity(hamis);
+        if (bestSpot != null) {
+            int amount = random.nextInt((max - min) + 1) + min;
+
+            for (int i = 0; i < amount; i++) {
+                HamisEntity hamis = ModEntities.HAMIS.get().create(level);
+                if (hamis != null) {
+                    double offsetX = (random.nextDouble() - 0.5) * 0.8;
+                    double offsetZ = (random.nextDouble() - 0.5) * 0.8;
+                    hamis.moveTo(
+                            bestSpot.getX() + 0.5 + offsetX,
+                            bestSpot.getY(),
+                            bestSpot.getZ() + 0.5 + offsetZ,
+                            random.nextFloat() * 360F,
+                            0.0F
+                    );
+                    level.addFreshEntity(hamis);
+                }
             }
         }
+    }
+
+    private BlockPos findValidSpawnSpot(ServerLevel level, BlockPos nestPos, Random random) {
+        BlockPos above = nestPos.above();
+        if (isSpotSafe(level, above)) {
+            return above;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            int dx = random.nextInt(3) - 1;
+            int dy = random.nextInt(2);
+            int dz = random.nextInt(3) - 1;
+
+            BlockPos candidate = nestPos.offset(dx, dy, dz);
+
+            if (isSpotSafe(level, candidate)) {
+                return candidate;
+            }
+        }
+
+        return null;
+    }
+
+    private boolean isSpotSafe(ServerLevel level, BlockPos pos) {
+        boolean isFree = level.getBlockState(pos).getCollisionShape(level, pos).isEmpty();
+        boolean hasFloor = level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP);
+        return isFree && hasFloor;
     }
 }
