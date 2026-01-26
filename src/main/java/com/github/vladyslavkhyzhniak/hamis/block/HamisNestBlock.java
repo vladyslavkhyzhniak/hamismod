@@ -49,7 +49,7 @@ public class HamisNestBlock extends Block {
         List<HamisEntity> list = level.getEntitiesOfClass(HamisEntity.class, checkArea);
 
         if (list.size() < 13) {
-            SpawnHamis((ServerLevel) level, blockPos, 2, 3);
+            SpawnHamis((ServerLevel) level, blockPos, 2, 4);
         }
     }
 
