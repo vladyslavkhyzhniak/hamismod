@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -221,5 +222,10 @@ public class HamisEntity extends PathfinderMob implements GeoEntity {
                 this.mob.setDeltaMovement(vec31.x, 0.4D, vec31.z);
             }
         }
+    }
+
+    @Override
+    protected ResourceLocation getDefaultLootTable(){
+        return new ResourceLocation(MOD_ID,"entities/hamis");
     }
 }
