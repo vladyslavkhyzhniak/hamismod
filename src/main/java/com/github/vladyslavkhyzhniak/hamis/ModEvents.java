@@ -16,7 +16,6 @@ public class ModEvents {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.HAMIS.get(), HamisEntity.createAttributes().build());
     }
-}
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
@@ -24,3 +23,4 @@ public class ModEvents {
         }
     }
 }
+

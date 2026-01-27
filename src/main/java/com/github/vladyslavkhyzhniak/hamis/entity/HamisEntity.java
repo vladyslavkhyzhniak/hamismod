@@ -30,6 +30,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 
+import static com.github.vladyslavkhyzhniak.hamis.hamis.MOD_ID;
+
 public class HamisEntity extends PathfinderMob implements GeoEntity {
     private final AnimatableInstanceCache cache = AzureLibUtil.createInstanceCache(this);
     public int jumpDelay;
@@ -223,7 +225,6 @@ public class HamisEntity extends PathfinderMob implements GeoEntity {
             }
         }
     }
-
     @Override
     protected ResourceLocation getDefaultLootTable(){
         return new ResourceLocation(MOD_ID,"entities/hamis");
