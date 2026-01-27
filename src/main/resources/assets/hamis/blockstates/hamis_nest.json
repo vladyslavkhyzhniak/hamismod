@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "hamis:block/hamis_nest" }
+  }
+}
