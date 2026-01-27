@@ -1,5 +1,6 @@
 package com.github.vladyslavkhyzhniak.hamis.client;
 
+import com.github.vladyslavkhyzhniak.hamis.client.model.HamisModel;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;

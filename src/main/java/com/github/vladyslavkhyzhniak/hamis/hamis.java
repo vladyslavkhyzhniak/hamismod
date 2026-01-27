@@ -4,6 +4,7 @@ import com.github.vladyslavkhyzhniak.hamis.init.ModBlocks;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import com.github.vladyslavkhyzhniak.hamis.init.ModItems;
 import com.mojang.logging.LogUtils;
+import mod.azure.azurelib.AzureLib;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +27,7 @@ public class hamis {
         ModEntities.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        AzureLib.initialize();
         MinecraftForge.EVENT_BUS.register(this);
     }
 }
