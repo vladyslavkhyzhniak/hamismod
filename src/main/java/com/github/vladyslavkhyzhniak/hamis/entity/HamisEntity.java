@@ -7,7 +7,10 @@ import mod.azure.azurelib.core.animation.AnimatableManager;
 import mod.azure.azurelib.core.animation.AnimationController;
 import mod.azure.azurelib.core.animation.RawAnimation;
 import mod.azure.azurelib.util.AzureLibUtil;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -29,6 +32,16 @@ import java.util.EnumSet;
 public class HamisEntity extends PathfinderMob implements GeoEntity {
     private final AnimatableInstanceCache cache = AzureLibUtil.createInstanceCache(this);
     public int jumpDelay;
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.SPIDER_STEP;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.SPIDER_DEATH;
+    }
 
     public HamisEntity(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
