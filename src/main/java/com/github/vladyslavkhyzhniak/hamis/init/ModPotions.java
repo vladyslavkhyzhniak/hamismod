@@ -2,6 +2,7 @@ package com.github.vladyslavkhyzhniak.hamis.init;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,11 +37,26 @@ public class ModPotions {
 
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            BrewingRecipeRegistry.addRecipe(new BrewingRecipe(
-                    Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-                    Ingredient.of(Items.SLIME_BALL),
-                    PotionUtils.setPotion(new ItemStack(Items.POTION), PHEROMONE_POTION.get())
-            ));
+            BrewingRecipeRegistry.addRecipe(new IBrewingRecipe() {
+
+                @Override
+                public boolean isInput(ItemStack input) {
+                    return PotionUtils.getPotion(input) == Potions.AWKWARD;
+                }
+
+                @Override
+                public boolean isIngredient(ItemStack ingredient) {
+                    return ingredient.getItem() == Items.SLIME_BALL;
+                }
+
+                @Override
+                public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                    if (isInput(input) && isIngredient(ingredient)) {
+                        return PotionUtils.setPotion(new ItemStack(input.getItem()), PHEROMONE_POTION.get());
+                    }
+                    return ItemStack.EMPTY;
+                }
+            });
         });
     }
 }
