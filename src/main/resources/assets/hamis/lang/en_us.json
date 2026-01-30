@@ -1,5 +1,10 @@
 {
   "entity.hamis.hamis": "Hamis",
   "item.hamis.hamis_spawn_egg": "Hamis Spawn Egg",
-  "block.hamis.nest": "Hamis Nest"
+  "block.hamis.nest": "Hamis Nest",
+  "effect.hamis.pheromone_effect": "Pheromone",
+  "item.minecraft.potion.effect.pheromone_potion": "Potion of Pheromones",
+  "item.minecraft.splash_potion.effect.pheromone_potion": "Splash Potion of Pheromones",
+
+  "tooltip.hamis.pheromone_desc": "Makes world friendlier"
 }
