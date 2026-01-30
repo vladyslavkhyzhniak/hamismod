@@ -4,7 +4,11 @@
   "block.hamis.nest": "Hamis Nest",
   "effect.hamis.pheromone_effect": "Pheromone",
   "item.minecraft.potion.effect.pheromone_potion": "Potion of Pheromones",
+  "item.minecraft.potion.effect.pheromone_potion_long": "Potion of Pheromones",
   "item.minecraft.splash_potion.effect.pheromone_potion": "Splash Potion of Pheromones",
+  "item.minecraft.splash_potion.effect.pheromone_potion_long": "Splash Potion of Pheromones",
+  "item.minecraft.lingering_potion.effect.pheromone_potion": "Lingering Potion of Pheromones",
+  "item.minecraft.lingering_potion.effect.pheromone_potion_long": "Lingering Potion of Pheromones",
 
   "tooltip.hamis.pheromone_desc": "Makes world friendlier"
 }

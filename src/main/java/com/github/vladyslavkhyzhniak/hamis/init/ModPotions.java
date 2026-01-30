@@ -31,6 +31,13 @@ public class ModPotions {
                     0
             )));
 
+    public static final RegistryObject<Potion> PHEROMONE_POTION_LONG = POTIONS.register("pheromone_potion_long",
+            () -> new Potion(new MobEffectInstance(
+                    ModEffects.PHEROMONE_EFFECT.get(),
+                    9600,
+                    0
+            )));
+
     public static void register(IEventBus eventBus) {
         POTIONS.register(eventBus);
     }
@@ -53,6 +60,25 @@ public class ModPotions {
                 public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
                     if (isInput(input) && isIngredient(ingredient)) {
                         return PotionUtils.setPotion(new ItemStack(input.getItem()), PHEROMONE_POTION.get());
+                    }
+                    return ItemStack.EMPTY;
+                }
+            });
+            BrewingRecipeRegistry.addRecipe(new IBrewingRecipe() {
+                @Override
+                public boolean isInput(ItemStack input) {
+                    return PotionUtils.getPotion(input)==PHEROMONE_POTION.get();
+                }
+
+                @Override
+                public boolean isIngredient(ItemStack ingredient) {
+                    return ingredient.getItem()==Items.REDSTONE;
+                }
+
+                @Override
+                public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                    if (isInput(input) && isIngredient(ingredient)) {
+                        return PotionUtils.setPotion(new ItemStack(input.getItem()),PHEROMONE_POTION_LONG.get());
                     }
                     return ItemStack.EMPTY;
                 }
