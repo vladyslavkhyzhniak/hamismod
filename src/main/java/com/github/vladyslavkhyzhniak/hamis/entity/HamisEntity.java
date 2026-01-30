@@ -135,6 +135,10 @@ public class HamisEntity extends PathfinderMob implements GeoEntity {
 
         @Override
         public boolean canUse() {
+            double followRange = this.mob.getAttributeValue(Attributes.FOLLOW_RANGE);
+            if (followRange <= 0.1) {
+                return false;
+            }
             LivingEntity target = this.mob.getTarget();
             if (target == null) return false;
             if (!target.isAlive()) return false;
