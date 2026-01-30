@@ -1,6 +1,7 @@
 package com.github.vladyslavkhyzhniak.hamis;
 
 import com.github.vladyslavkhyzhniak.hamis.init.ModBlocks;
+import com.github.vladyslavkhyzhniak.hamis.init.ModEffects;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import com.github.vladyslavkhyzhniak.hamis.init.ModItems;
 import com.mojang.logging.LogUtils;
@@ -26,6 +27,7 @@ public class hamis {
         ModItems.register(modEventBus);
         ModEntities.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModEffects.register(modEventBus);
 
         AzureLib.initialize();
         MinecraftForge.EVENT_BUS.register(this);
