@@ -1,5 +1,6 @@
 package com.github.vladyslavkhyzhniak.hamis.init;
 
+import com.github.vladyslavkhyzhniak.hamis.item.HamisNestItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,6 +18,8 @@ public class ModItems {
             ()-> new ForgeSpawnEggItem(ModEntities.HAMIS, 0x553473, 0xC7EF63,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> HAMIS_NEST_ITEM = ITEMS.register("hamis_nest",
+            () -> new HamisNestItem(ModBlocks.HAMIS_NEST.get(), new Item.Properties()));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

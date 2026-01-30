@@ -1,28 +1,67 @@
 package com.github.vladyslavkhyzhniak.hamis.block;
 import com.github.vladyslavkhyzhniak.hamis.entity.HamisEntity;
+import com.github.vladyslavkhyzhniak.hamis.entity.HamisNestBlockEntity;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class HamisNestBlock extends Block {
-
+public class HamisNestBlock extends Block  implements EntityBlock {
+    private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 12, 15);
     public HamisNestBlock() {
         super(BlockBehaviour.Properties.of()
                 .strength(0.5f)
                 .sound(SoundType.SLIME_BLOCK)
                 .randomTicks()
+                .noOcclusion()
+                .isRedstoneConductor((bs, br, bp) -> false)
+                .isSuffocating((bs, br, bp) -> false)
+                .isViewBlocking((bs, br, bp) -> false)
         );
+    }
+    @Override
+    public boolean useShapeForLightOcclusion(BlockState state) {
+        return false;
+    }
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+    @Override
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+        return true;
+    }
+    @Override
+    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1.0F;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
+    @Override
+    @Nullable
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new HamisNestBlockEntity(pos, state);
     }
 
     @Override
