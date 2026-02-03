@@ -3,14 +3,14 @@ description: Report a game crash.
 title: "[Crash]: "
 labels: ["bug", "crash"]
 body:
-    - type: checkboxes
+  - type: checkboxes
     id: duplicate_check
     attributes:
       label: Duplicate check
       options:
         - label: I have searched for existing issues and didn't find any.
           required: true
-          
+
   - type: markdown
     attributes:
       value: |
@@ -33,8 +33,8 @@ body:
       render: java
     validations:
       required: true
-      
-      - type: input
+
+  - type: input
     id: video_link
     attributes:
       label: Video / Screenshot Link
