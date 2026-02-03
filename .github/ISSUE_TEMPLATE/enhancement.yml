@@ -1,0 +1,22 @@
+name: "💎 Enhancement"
+description: Suggest an improvement for an existing mechanic.
+title: "[Enhancement]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: Current Behavior
+      description: How does it work now?
+      placeholder: The jumping animation is too slow...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How should it work?
+      placeholder: Make the animation transition faster...
+    validations:
+      required: true
