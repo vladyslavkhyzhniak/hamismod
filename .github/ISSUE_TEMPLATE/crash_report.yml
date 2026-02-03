@@ -1,0 +1,27 @@
+name: "💥 Crash Report"
+description: Report a game crash.
+title: "[Crash]: "
+labels: ["bug", "crash"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If the game crashed, we **NEED** the crash report file to fix it.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What were you doing before the crash?
+      placeholder: I placed a Hamis Nest and the game closed...
+    validations:
+      required: true
+
+  - type: textarea
+    id: crash_log
+    attributes:
+      label: Crash Report Content
+      description: Open the crash-report file with a text editor and paste EVERYTHING here.
+      render: java
+    validations:
+      required: true
