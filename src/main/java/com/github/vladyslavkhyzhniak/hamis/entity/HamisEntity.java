@@ -75,8 +75,7 @@ public class HamisEntity extends PathfinderMob implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
-
-        if (this.onGround()) {
+        if (this.onGround() || this.isInWater()) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(0, 1, 0));
 
             if (this.jumpDelay > 0) {
@@ -167,7 +166,7 @@ public class HamisEntity extends PathfinderMob implements GeoEntity {
 
             double distSqr = this.mob.distanceToSqr(target);
 
-            if (this.mob.onGround() && this.mob.jumpDelay <= 0) {
+            if ((this.mob.onGround() || this.mob.isInWater()) && this.mob.jumpDelay <= 0) {
                 this.mob.jumpDelay = this.mob.getRandom().nextInt(20) + 10;
 
                 Vec3 vec3 = this.mob.getDeltaMovement();
@@ -213,7 +212,7 @@ public class HamisEntity extends PathfinderMob implements GeoEntity {
 
         @Override
         public void tick() {
-            if (this.mob.onGround()) {
+            if (this.mob.onGround() || this.mob.isInWater()) {
                 this.mob.jumpDelay = this.mob.getRandom().nextInt(40) + 20;
 
                 Vec3 vec3 = this.mob.getDeltaMovement();
