@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "hamis:hamis_nest_placed",
+  "step": "underground_decoration"
+}

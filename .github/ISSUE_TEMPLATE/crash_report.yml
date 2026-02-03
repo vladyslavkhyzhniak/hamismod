@@ -1,0 +1,44 @@
+name: "💥 Crash Report"
+description: Report a game crash.
+title: "[Crash]: "
+labels: ["bug", "crash"]
+body:
+  - type: checkboxes
+    id: duplicate_check
+    attributes:
+      label: Duplicate check
+      options:
+        - label: I have searched for existing issues and didn't find any.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        If the game crashed, we **NEED** the crash report file to fix it.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What were you doing before the crash?
+      placeholder: I placed a Hamis Nest and the game closed...
+    validations:
+      required: true
+
+  - type: textarea
+    id: crash_log
+    attributes:
+      label: Crash Report Content
+      description: Open the crash-report file with a text editor and paste EVERYTHING here.
+      render: java
+    validations:
+      required: true
+
+  - type: input
+    id: video_link
+    attributes:
+      label: Video / Screenshot Link
+      description: Provide a link to a video or screenshot (YouTube, Streamable, Imgur, etc.) showing the bug.
+      placeholder: https://youtu.be/...
+    validations:
+      required: false
