@@ -3,6 +3,14 @@ description: Report a game crash.
 title: "[Crash]: "
 labels: ["bug", "crash"]
 body:
+- type: checkboxes
+    id: duplicate_check
+    attributes:
+      label: Duplicate check
+      options:
+        - label: I have searched for existing issues and didn't find any.
+          required: true
+          
   - type: markdown
     attributes:
       value: |
@@ -25,3 +33,12 @@ body:
       render: java
     validations:
       required: true
+      
+      - type: input
+    id: video_link
+    attributes:
+      label: Video / Screenshot Link
+      description: Provide a link to a video or screenshot (YouTube, Streamable, Imgur, etc.) showing the bug.
+      placeholder: https://youtu.be/...
+    validations:
+      required: false
