@@ -3,6 +3,9 @@ name: Release Mod
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
+permissions:
+  contents: write
 
 jobs:
   build-and-release:
@@ -24,7 +27,6 @@ jobs:
       - name: Get version
         id: get_version
         run: |
-          # Ищем строчку version=1.0.0 и берем цифры после равно
           VERSION=$(grep "^version=" gradle.properties | cut -d'=' -f2)
           echo "MOD_VERSION=$VERSION" >> $GITHUB_ENV
 
