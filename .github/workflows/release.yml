@@ -35,8 +35,9 @@ jobs:
         id: changelog
         run: |
           EOF=$(openssl rand -hex 8)
-          echo "BODY<<$EOF" >> $GITHUB_ENV # <--- Гитхаб ждет "a1b2c3d4"
+          echo "BODY<<$EOF" >> $GITHUB_ENV
           cat changelog.txt >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
           echo "$EOF" >> $GITHUB_ENV
 
       - name: Publish Mod
