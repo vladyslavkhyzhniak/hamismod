@@ -3,7 +3,7 @@ description: Report a game crash.
 title: "[Crash]: "
 labels: ["bug", "crash"]
 body:
-- type: checkboxes
+    - type: checkboxes
     id: duplicate_check
     attributes:
       label: Duplicate check
