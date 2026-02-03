@@ -34,9 +34,10 @@ jobs:
       - name: Read changelog
         id: changelog
         run: |
-          echo "BODY<<EOF" >> $GITHUB_ENV
+          EOF=$(openssl rand -hex 8)
+          echo "BODY<<$EOF" >> $GITHUB_ENV # <--- Гитхаб ждет "a1b2c3d4"
           cat changelog.txt >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          echo "$EOF" >> $GITHUB_ENV
 
       - name: Publish Mod
         uses: Kir-Antipov/mc-publish@v3.3
