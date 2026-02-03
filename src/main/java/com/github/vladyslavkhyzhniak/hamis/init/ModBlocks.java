@@ -28,7 +28,7 @@ public class ModBlocks {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    public static final RegistryObject<Block> HAMIS_NEST = registerBlock("hamis_nest", HamisNestBlock::new);
+    public static final RegistryObject<Block> HAMIS_NEST = BLOCKS.register("hamis_nest", HamisNestBlock::new);
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

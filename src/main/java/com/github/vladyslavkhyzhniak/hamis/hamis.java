@@ -1,5 +1,6 @@
 package com.github.vladyslavkhyzhniak.hamis;
 
+import com.github.vladyslavkhyzhniak.hamis.init.ModBlockEntities;
 import com.github.vladyslavkhyzhniak.hamis.init.ModBlocks;
 import com.github.vladyslavkhyzhniak.hamis.init.ModEntities;
 import com.github.vladyslavkhyzhniak.hamis.init.ModItems;
@@ -26,6 +27,7 @@ public class hamis {
         ModItems.register(modEventBus);
         ModEntities.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
 
         AzureLib.initialize();
         MinecraftForge.EVENT_BUS.register(this);
