@@ -4,36 +4,43 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-
-import java.time.Duration;
+import org.jetbrains.annotations.NotNull;
 
 public class PheromoneEffect extends MobEffect {
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return duration%20 == 0;
-    }
-
     public PheromoneEffect(MobEffectCategory category, int color) {
         super(category, color);
         this.addAttributeModifier(
-                Attributes.FOLLOW_RANGE,
-                "7107DE5E-7CE8-4030-940E-514C1F160890",
+                Attributes.ATTACK_DAMAGE,
+                "5488A193-352D-4E14-8785-3571A3783935",
                 -1.0,
                 AttributeModifier.Operation.MULTIPLY_TOTAL
         );
 
+        this.addAttributeModifier(
+                Attributes.ATTACK_SPEED,
+                "A6C96C32-E7A9-4186-9C6B-708092B04D6D",
+                -1.0,
+                AttributeModifier.Operation.MULTIPLY_TOTAL
+        );
+    }
+    @Override
+    public boolean isDurationEffectTick(int duration, int amplifier) {
+        return true;
     }
 
     @Override
-    public void applyEffectTick(LivingEntity livingEntity, int Ampilfier) {
-        if(livingEntity instanceof Mob mob){
-            if (mob.getTarget() != null){
-                mob.setTarget(null);
+    public void applyEffectTick(@NotNull LivingEntity livingEntity, int amplifier) {
+        if (livingEntity instanceof net.minecraft.world.entity.player.Player) {
+            return;
+        }else if (!livingEntity.level().isClientSide && livingEntity instanceof Mob mob) {
+            mob.setLastHurtByMob(null);
+
+            if (mob instanceof NeutralMob neutral) {
+                neutral.stopBeingAngry();
             }
         }
-
-        super.applyEffectTick(livingEntity,Ampilfier);
     }
 }
